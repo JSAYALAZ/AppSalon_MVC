@@ -1,0 +1,19 @@
+{
+    "name": "josea/app-salon_mvc",
+    "description": "Proyecto PHP8 appsalon",
+    "type": "project",
+    "autoload":{
+        "psr-4": {
+            "MVC\\": "./",
+            "Controllers\\":"./controllers",
+            "Model\\":"./models"
+        }
+    },
+    "authors": [
+        {
+            "name": "GalaxyAYL",
+            "email": "josealbertoayalazumba@gmail.com"
+        }
+    ],
+    "require": {}
+}
