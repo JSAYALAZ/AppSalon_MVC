@@ -1,6 +1,11 @@
 <h1 class="nombre-pagina">Crear cuenta</h1>
 <p class="descripcion-pagina">Llene el formulario para crear una cuenta</p>
 
+<div class="alerta">
+    <?php foreach($alertas as $alerta):?>
+        <p><?php echo $alerta ?></p>
+    <?php endforeach?>
+</div>
 <form action="/crear-cuenta" class="formulario" method="POST">
     <div class="campo">
         <label for="nombre">Nombre</label>
@@ -9,6 +14,7 @@
             name="nombre"
             type="text" 
             placeholder="Cual es tu nombre?"
+            value="<?php echo s($usuario->nombre) ?>"
         />
     </div>
     <div class="campo">
@@ -18,6 +24,7 @@
             name="apellido"
             type="text" 
             placeholder="Cual es tu apellido?"
+            value="<?php echo s($usuario->apellido) ?>"
         />
     </div>
     <div class="campo">
@@ -27,15 +34,17 @@
             type="tel" 
             name="celular"
             placeholder="Cual es tu contacto?"
+            value="<?php echo s($usuario->celular) ?>"
         />
     </div>
     <div class="campo">
-        <label for="emial">Email</label>
+        <label for="email">Email</label>
         <input 
-            id="emial"
+            id="email"
             type="mail" 
-            name="emial"
+            name="email"
             placeholder="Cual es tu email?"
+            value="<?php echo s($usuario->email) ?>"
         />
     </div>
     <div class="campo">
@@ -45,6 +54,7 @@
             type="password" 
             name="passwd"
             placeholder="Ingrese contraseña"
+            value="<?php echo s($usuario->passwd) ?>"
         />
     </div>
     <input type="submit" class="boton" value="Crear Cuenta">
