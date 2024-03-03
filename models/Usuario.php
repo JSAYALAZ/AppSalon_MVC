@@ -4,7 +4,7 @@ namespace Model;
 
 class Usuario extends ActiveRecord{
     protected static $tabla = 'usuarios';
-    protected static $atributosDB = [
+    protected static $columnasDB = [
         'id',
         'nombre',
         'apellido',
@@ -65,6 +65,11 @@ class Usuario extends ActiveRecord{
         return self::getAlertas();
     }
 
+    public function validarLogin(){
+        !$this->email?self::setAlerta('error','Falta email'):'';
+        !$this->passwd?self::setAlerta('error','Falta password'):'';
+        return self::getAlertas();
+    }
 
     public function existeUsuario(){
         $query = "SELECT * FROM ";
@@ -85,5 +90,15 @@ class Usuario extends ActiveRecord{
     }
     public function crearToken(){
         $this->token = uniqid();
+    }
+    public function comprobarPasswordAndVerificado($passwd){
+        $resultado = password_verify($passwd,$this->passwd);
+
+        if(!$this->confirmado || !$resultado){
+            return false;
+        }else{
+            return true;
+        }
+
     }
 }

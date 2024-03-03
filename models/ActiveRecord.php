@@ -115,6 +115,11 @@ class ActiveRecord {
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
     }
+    public static function where($atributo, $valor) {
+        $query = "SELECT * FROM " . static::$tabla  ." WHERE $atributo = '$valor'";
+        $resultado = self::consultarSQL($query);
+        return array_shift( $resultado ) ;
+    }
 
     // crea un nuevo registro
     public function crear() {
@@ -127,7 +132,6 @@ class ActiveRecord {
         $query .= " ) VALUES (' "; 
         $query .= join("', '", array_values($atributos));
         $query .= " ') ";
-
         // Resultado de la consulta
         $resultado = self::$db->query($query);
         return [

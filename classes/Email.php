@@ -71,11 +71,7 @@ class Email {
     
         $mail->Body = $contenido;
         // Enviar email
-        if($mail->send()){
-            debuguear('El correo se envió correctamente');
-        }else{
-            debuguear('Hubo un problema al enviar el correo: ' . $mail->ErrorInfo);
-        }
+        $mail->send();
     }
 }
 

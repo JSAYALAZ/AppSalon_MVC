@@ -1,6 +1,12 @@
 <h1 class="nombre-pagina">Login</h1>
 <p class="descripcion-pagina">Inicia sesion con tus datos</p>
-
+<?php foreach ($alertas as $key => $mensajes): ?>
+    <?php foreach ($mensajes as $mensaje): ?>
+        <div class="alerta <?php echo $key ?>">
+        <?php echo $mensaje ?>
+    </div>
+    <?php endforeach ?>
+<?php endforeach ?>
 <form action="/" class="formulario" method="POST">
     <div class="campo">
         <label for="email">Email</label>
@@ -9,6 +15,7 @@
             type="email"
             name="email"
             placeholder="Ejem: correo@correo.com"
+            value="<?php echo s($usuario->email) ?>"
         />
     </div>
     <div class="campo">
