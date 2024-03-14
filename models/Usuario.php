@@ -71,6 +71,11 @@ class Usuario extends ActiveRecord{
         return self::getAlertas();
     }
 
+    public function validarEmail(){
+        !$this->email?self::setAlerta('error','Falta email'):'';
+        return self::getAlertas();
+    }
+
     public function existeUsuario(){
         $query = "SELECT * FROM ";
         $query .= self::$tabla;
@@ -95,7 +100,7 @@ class Usuario extends ActiveRecord{
         $resultado = password_verify($passwd,$this->passwd);
 
         if(!$this->confirmado || !$resultado){
-            return false;
+            self::$alertas['error'][]='Password incorrecto o tu cuenta no ha sido confirmada';
         }else{
             return true;
         }

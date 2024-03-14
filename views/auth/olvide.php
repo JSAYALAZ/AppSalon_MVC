@@ -1,13 +1,22 @@
 <h1 class="nombre-pagina">Olvide contraseña</h1>
 <p class="descripcion-pagina">Restablecer contraseña con correo electronico</p>
-
+<?php if ($alertas != null): ?>
+    <?php foreach ($alertas as $key => $mensajes): ?>
+        <?php foreach ($mensajes as $mensaje): ?>
+            <div class="alerta <?php echo $key ?>">
+                <?php echo $mensaje ?>
+            </div>
+        <?php endforeach ?>
+    <?php endforeach ?>
+<?php endif ?>
 <form action="/olvide" class="formulario" method="POST">
     <div class="campo">
-        <label for="mail">Ingrese correo</label>
+        <label for="email">Ingrese correo</label>
         <input 
-            id="mail"
+            id="email"
             type="mail"
-            name="mail"
+            name="email"
+
             placeholder="Ingrese correo"
         />
     </div>
