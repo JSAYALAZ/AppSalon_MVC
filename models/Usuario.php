@@ -76,6 +76,12 @@ class Usuario extends ActiveRecord{
         return self::getAlertas();
     }
 
+    public function validarPassword(){
+        !$this->passwd?self::setAlerta('error','Falta password'):'';
+        
+        strlen($this->passwd)<6?self::setAlerta('error','Minimo de 6 letras'):'';
+    }
+
     public function existeUsuario(){
         $query = "SELECT * FROM ";
         $query .= self::$tabla;
@@ -91,7 +97,6 @@ class Usuario extends ActiveRecord{
 
     public function hashPassword(){
         $this->passwd = password_hash($this->passwd, PASSWORD_BCRYPT);
-
     }
     public function crearToken(){
         $this->token = uniqid();

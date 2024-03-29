@@ -92,19 +92,22 @@ class ActiveRecord {
     // Registros - CRUD
     public function guardar() {
         $resultado = '';
-        if(!is_null($this->id)) {
-            // actualizar
-            $resultado = $this->actualizar();
-        } else {
+        if(is_null($this->id)) {
             // Creando un nuevo registro
             $resultado = $this->crear();
+        } else {
+            // actualizar
+            
+            $resultado = $this->actualizar();
         }
         return $resultado;
     }
 
     // Todos los registros
     public static function all($limite = null) {
-        $query = "SELECT * FROM " . static::$tabla. $limite!=null?' LIMIT '.$limite:'' ;
+        $query = "SELECT * FROM ";
+        $query.= static::$tabla." ";
+        $query.= $limite!=null?' LIMIT '.$limite:'' ;
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
@@ -120,6 +123,7 @@ class ActiveRecord {
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
     }
+
 
     // crea un nuevo registro
     public function crear() {
@@ -147,16 +151,18 @@ class ActiveRecord {
 
         // Iterar para ir agregando cada campo de la BD
         $valores = [];
-        foreach($atributos as $key => $value) {
-            $valores[] = "{$key}='{$value}'";
+        foreach ($atributos as $key => $value) {
+            if ($key != 'admin') {
+                $valores[] = "{$key}='{$value}'";
+            }
         }
-
+        
         // Consulta SQL
         $query = "UPDATE " . static::$tabla ." SET ";
         $query .=  join(', ', $valores );
         $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
         $query .= " LIMIT 1 "; 
-
+    
         // Actualizar BD
         $resultado = self::$db->query($query);
         return $resultado;
