@@ -14,32 +14,48 @@
     <div id="paso-1" class="seccion">
         <h2>Servicios</h2>
         <p class="text-center">Elige tus servicios a continuacion</p>
-        <div id="servicios" class="listado-servicios"></div>
+        <div id="servicios" class="listado-servicios">
+            <!-- INYECTADO DESDE JAVASCRIPT -->
+        </div>
     </div>
 
     <!-- RELLENO DE DATOS DEL CLIENTE -->
     <div id="paso-2" class="seccion">
-        <h2>Tus datos yy cita</h2>
+        <h2>Tus datos y cita</h2>
         <p class="text-center">Coloca tus datos y fecha de la cita</p>
 
         <form class="formulario">
             <div class="campo">
                 <label for="nombre">Nombre</label>
-                <input id="nombre" type="text" value="<?php echo strtoupper($nombre) ?>" disabled>
+                <input 
+                id="nombre" 
+                type="text" 
+                value="<?php echo strtoupper($nombre) ?>" 
+                disabled>
             </div>
             <div class="campo">
                 <label for="fecha">Fecha</label>
-                <input id="fecha" type="date" placeholder="Fecha de la cita">
+                <input 
+                id="fecha" 
+                type="date"
+                min="<?php echo date('Y-m-d', strtotime('+1 day')) ?>"
+                >
             </div>
+
             <div class="campo">
                 <label for="hora">Hora</label>
-                <input id="hora" type="time" placeholder="Hora de la cita">
+                <input 
+                id="hora" 
+                type="time" 
+                min="8:00"
+                max="19:00"
+                >
             </div>
         </form>
     </div>
 
     <!-- RESUMEN DEL SERVICIO A REALIZAR -->
-    <div id="paso-3" class="seccion">
+    <div id="paso-3" class="seccion contenido-resumen">
         <h2>Resumen</h2>
         <p class="text-center">Verifica que la informacion sea correcta</p>
     </div>
