@@ -102,5 +102,8 @@ function mostrarServicios (servicios){
         nombreServicio.classList.add('precio-servicio');
         nombreServicio.textContent= `$ ${precio}`;
 
+        const servicioDiv = document.createElement('DIV');
+        servicioDiv.classList.add('servicio');
+        servicioDiv.dataset.idServicio = id;
     })
 }
