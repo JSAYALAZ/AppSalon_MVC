@@ -1,6 +1,11 @@
 <h1 class="nombre-pagina">Crear nueva cita</h1>
 <p class="descripcion-pagina">Elige tus servicios y coloca tus datos</p>
 
+<div class="barra">
+    <p>Hola: <span><?php echo $_SESSION['nombre']??''?></span></p>
+    <a class="boton" href="/logout">Cerrar Sesion</a>
+</div>
+
 <div id="app">
 
     <nav class="tabs">
@@ -51,6 +56,8 @@
                 max="19:00"
                 >
             </div>
+
+            <input type="hidden" id="id" value="<?php echo $id; ?>">
         </form>
     </div>
 
@@ -75,6 +82,7 @@
 
 <?php
     $script = "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
         <script src='build/js/app.js'></script>
     ";
 ?>

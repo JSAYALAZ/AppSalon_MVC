@@ -1,3 +1,7 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+
 .seccion{
     padding: 5rem 0;
     display: none;
@@ -5,6 +9,30 @@
         text-align: center;
     }
 
+}
+
+.barra{
+    margin-bottom: 7rem;
+    text-align: center;
+    text-transform: uppercase;
+
+    @include m.tablet{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    p{
+        span{
+            font-weight: bold;
+            color: yellow; 
+        }
+    }
+
+
+    .boton{
+        @include m.boton(v.$negro, v.$blanco);
+        margin: 0;
+    }
 }
 
 .mostrar{

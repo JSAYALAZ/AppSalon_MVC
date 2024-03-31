@@ -4,6 +4,7 @@ let paso =1;
 const pasoInicial =1;
 const pasoFinal = 3;
 const cita ={
+    id: '',
     nombre: '',
     fecha: '',
     hora:'',
@@ -22,6 +23,7 @@ function iniciarApp(){
     paginaAnterior();
 
     consultarApi();//Consulta la api en el backend
+    idCliente();
     nombreCliente();
     seleccionarFecha();
     seleccionarHora();
@@ -101,7 +103,7 @@ function paginaAnterior(){
 }
 async function consultarApi(){
     try {
-        const url = 'http://localhost:8000/api/servicios';
+        const url = 'http://127.0.0.1:8000/api/servicios';
         const resultado = await fetch(url);
         const servicios = await resultado.json();
         mostrarServicios(servicios);
@@ -150,6 +152,9 @@ function seleccionarServicio(servicio){
 
 function nombreCliente(){
     cita.nombre = document.querySelector('#nombre').value;
+}
+function idCliente(){
+    cita.id = document.querySelector('#id').value;
 }
 
 function seleccionarFecha(){
@@ -285,17 +290,42 @@ function mostrarResumen(){
 
 //funcion asincrona
 async function reservarCita(){
-    const datos = new FormData();
-    datos.append('nombre', 'juan');
+    //ASIGNACION DE DATOS A ENVIAR
+    const {nombre, fecha, hora, servicios, id} = cita;
+    const idServicios = servicios.map(servicio => servicio.id);
 
-    // PETICION A LA API 
-    const url = 'http://127.0.0.1:8000/api/citas';
-    // espera hasta que aparesca la respuesta del fetch
-    const respuesta = await fetch(url,{
-        method: 'POST'
-    });
+    const datos = new FormData();
+    datos.append('usuarioId', id);
+    datos.append('fecha', fecha);
+    datos.append('hora', hora);
+    datos.append('servicios', idServicios);
+
+
+    try {
+        // PETICION A LA API 
+        const url = 'http://127.0.0.1:8000/api/citas';
+        const respuesta = await fetch(url,{
+            method: 'POST',
+            body: datos
+        });
+        
+        const resultado = await respuesta.json();
+        if(resultado.resultado){
+            Swal.fire({
+                icon: "success",
+                title: "Cita creada",
+                text: "Tu cita a sido creada correctamente",
+                button: 'OK'
+            }).then(()=>{
+                window.location.reload();
+            })
+        }
+    } catch (error) {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!"
+          });
+    }
     
-    // convierte a json
-    const resultado = await respuesta.json();
-    console.log(resultado);
 }
