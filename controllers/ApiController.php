@@ -31,4 +31,7 @@ class ApiController{
 
         echo json_encode(['resultado'=>$resultado]);
     }
+    public static function eliminar(){
+        
+    }
 }

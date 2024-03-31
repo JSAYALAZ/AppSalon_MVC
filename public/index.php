@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../includes/app.php';
 
+use Controllers\AdminController;
 use Controllers\ApiController;
 use Controllers\CitaController;
 use Controllers\LoginController;
@@ -30,10 +31,12 @@ $router->get('/mensaje', [LoginController::class, 'mensaje']);
 
 //AREA PRIVADA
 $router->get('/cita',[CitaController::class,'index']);
+$router->get('/admin',[AdminController::class,'index']);
 
 //API DE CITAS
 $router->get('/api/servicios',[ApiController::class, 'index']);
 $router->post('/api/citas',[ApiController::class, 'guardar']);
+$router->post('/api/eliminar',[ApiController::class, 'eliminar']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
