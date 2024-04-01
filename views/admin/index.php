@@ -5,6 +5,11 @@
     <p>Hola: <span><?php echo $nombre?? ''?></span></p>
     <a class="boton" href="/logout">Cerrar Sesion</a>
 </div>
+<div class="barra-servicios">
+    <a class="boton" href="/admin">Ver citas</a>
+    <a class="boton" href="/servicios">Ver servicios</a>
+    <a class="boton" href="/servicios/crear">Nuevo Servicio</a>
+</div>
 
 <h2>Buscar Citas</h2>
 <div class="busqueda">
@@ -50,15 +55,24 @@
         <p class="servicio"><?php echo $cita->servicio!=null?($cita->servicio.'  $'. $cita->precio ):  'No se establecieron servicios' ?></p>
 
         <?php 
-        if($cita->servicio!=null)
-        {
+        
             $actual = $cita->id??0;
             $proximo = $citas[$key+1]->id??0;
             if(esUltimo($actual, $proximo)){?>
                 <p class="total">Total: <span>$ <?php echo $total ?></span></p>
+                <form action="/api/eliminar" method="post">
+                    <input 
+                    type="hidden"
+                    name="id"
+                    value="<?php echo $cita->id ?>"
+                    >
+                    <input type="submit"
+                    class="boton-eliminar"
+                    value="Eliminar"
+                    >
+                </form>
             <?php
             }
-        }
         ?>
     <?php endforeach ?>
     </ul>

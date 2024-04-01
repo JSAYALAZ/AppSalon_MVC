@@ -36,4 +36,18 @@
     @include m.tablet{
         display: flex;
     }
+
+}
+
+.barra-servicios{
+    margin-bottom: v.$separacion;
+    @include m.tablet{
+        display: flex;
+        justify-content: space-between;
+
+    }
+    .boton{
+        margin: 0 0 1rem;
+
+    }
 }

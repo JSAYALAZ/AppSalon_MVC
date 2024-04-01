@@ -8,6 +8,9 @@ use MVC\Router;
 class AdminController{
     public static function index(Router $router){
         session_start();
+        if($_SESSION['admin']!='1'||$_SESSION['login']!=true){
+            header('Location: /');
+        }
         $fecha = $_GET['fecha'];
 
         if($_GET==null){
