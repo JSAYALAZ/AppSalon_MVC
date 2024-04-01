@@ -1,4 +1,4 @@
-<h1 class="nombre-pagina">Servicios</h1>
+<h1 class="nombre-pagina">Actualizar Servicio</h1>
 <p class="descripcion-pagina">Administrador de servicios</p>
 
 <div class="barra">
@@ -11,6 +11,9 @@
 <a class="boton" href="/servicios/crear">Nuevo Servicio</a>
 </div>
 
-<?php foreach ($servicios as $servicio): ?>
-    
-<?php endforeach ?>
+<form method="POST" class="formulario">
+    <?php
+        include_once 'formulario.php';
+    ?>
+    <input type="submit" class="boton" value="Actualizar servicio">
+</form>
